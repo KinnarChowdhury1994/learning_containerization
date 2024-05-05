@@ -1,16 +1,22 @@
-FROM python:3.8-slim
+FROM python:3.7-slim
 
-ARG PROJECT=flask_project
-ARG PROJECT_DIR=/home/ubuntu/flask_project
+RUN apt-get update -y
 
-WORKDIR $PROJECT_DIR
+COPY ./ /app
+WORKDIR /app
+
+# ARG PROJECT=flask_project
+# ARG PROJECT_DIR=/home/ubuntu/flask_project
+
+# WORKDIR $PROJECT_DIR
 
 COPY requirements.txt .
 
-ADD . $PROJECT_DIR
+ADD . /app
 
 RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
-ADD . $PROJECT_DIR
+ADD . /app
 
-ENTRYPOINT [ "python3", "application.py", "0.0.0.0:5000"]
+ENTRYPOINT [ "python" ]
+CMD [ "application.py" ]
