@@ -1,10 +1,16 @@
 FROM python:3.8-slim
 
-WORKDIR /flask-docker
+ARG PROJECT=flask_project
+ARG PROJECT_DIR=/home/ubuntu/flask_project
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+WORKDIR $PROJECT_DIR
 
-COPY . .
+COPY requirements.txt .
 
-CMD [ "python3", "application.py"]
+ADD . $PROJECT_DIR
+
+RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+
+ADD . $PROJECT_DIR
+
+ENTRYPOINT [ "python3", "application.py"]
