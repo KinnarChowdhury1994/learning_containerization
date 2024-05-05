@@ -13,4 +13,4 @@ RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
 ADD . $PROJECT_DIR
 
-ENTRYPOINT [ "python3", "application.py"]
+ENTRYPOINT [ "python3", "application.py", "0.0.0.0:5000"]
